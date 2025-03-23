@@ -493,7 +493,7 @@ export function getStrategiesByRisk(risk: RiskProfile): Strategy[] {
 // Helper function: Sort strategies by performance
 export function getSortedStrategies(metric: 'apy' | 'tvl', ascending: boolean = false): Strategy[] {
   return [...strategies].sort((a, b) => {
-    const valueA = a[metric] ?? 0; // 使用空值合并运算符提供默认值
+    const valueA = a[metric] ?? 0; // Use nullish coalescing operator to provide default value
     const valueB = b[metric] ?? 0;
     return ascending ? valueA - valueB : valueB - valueA;
   });
