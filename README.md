@@ -1,7 +1,7 @@
 # NEXUSfi
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/NEXUSfi-Agent/NEXUSfi/main/public/logo.svg" alt="NEXUSfi Logo" width="300">
+  <img src="public/logo.svg" alt="NEXUSfi Logo" width="300">
 </div>
 
 ## AI-Driven Cryptocurrency Investment Protocol Built on Solana
@@ -71,11 +71,6 @@ To transform cryptocurrency investment by connecting sophisticated quantitative 
 
 NEXUSfi follows a modern architecture pattern with clear separation of concerns between frontend, backend, and blockchain integration layers.
 
-<div align="center">
-  <p><em>Architecture Diagram - View high-resolution image for details</em></p>
-  <img src="public/images/architecture.txt" alt="NEXUSfi Architecture Diagram" width="800">
-</div>
-
 ### Frontend Layer
 - Built with Next.js App Router for server-side rendering
 - Component-based architecture using React
@@ -101,11 +96,6 @@ NEXUSfi follows a modern architecture pattern with clear separation of concerns 
 
 The NEXUSfi platform implements several key architectural patterns to ensure a robust, maintainable, and scalable application.
 
-<div align="center">
-  <p><em>Implementation Flow Diagram - View high-resolution image for details</em></p>
-  <img src="public/images/implementation-flow.txt" alt="NEXUSfi Implementation Flow" width="800">
-</div>
-
 ### Strategy Management Flow
 
 The strategy management process utilizes a sophisticated pipeline that combines user preferences, market data, and risk assessment to select the optimal investment strategies. Once strategies are selected, portfolios are constructed and continuously optimized through automated rebalancing based on market conditions.
@@ -123,11 +113,6 @@ NEXUSfi implements a modular architecture with the following key design patterns
 ## Data Flow
 
 The application follows a unidirectional data flow pattern to ensure predictable state management and UI rendering.
-
-<div align="center">
-  <p><em>Data Flow Diagram - View high-resolution image for details</em></p>
-  <img src="public/images/data-flow.txt" alt="NEXUSfi Data Flow" width="800">
-</div>
 
 ### User Interaction Flow
 
@@ -332,7 +317,6 @@ NEXUSfi/
 - Website: [nexusfix.xyz](https://nexusfix.xyz)
 - Twitter: [@NEXUSfi_](https://x.com/NEXUSfi_)
 - GitHub: [NEXUSfi-Agent](https://github.com/NEXUSfi-Agent)
-- Email: info@nexusfi.xyz
 
 ## License
 
@@ -341,15 +325,6 @@ MIT License
 ## Developer Notes
 
 To convert the SVG logo to PNG for use in other contexts, open the `public/svg_to_png.html` file in a browser, click "Convert to PNG", and then "Download PNG".
-
-### Diagram Viewer
-
-The project includes diagram specifications for architecture, data flow, and implementation flow. To view these diagram specifications:
-
-1. Run the development server using `npm run dev` or `yarn dev`
-2. Navigate to `/diagram_viewer.html` in your browser
-3. Use the buttons to load and view each diagram's specifications
-4. The actual diagrams should be created by a designer using these specifications before project release
 
 ## Development Progress
 
