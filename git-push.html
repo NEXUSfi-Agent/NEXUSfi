@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUSfi Git Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .instructions {
+            background-color: #e9f7fe;
+            border-left: 4px solid #1e88e5;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #f1f1f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>NEXUSfi Git Operations</h1>
+    
+    <div class="card">
+        <h2>Git Configuration Status</h2>
+        <p>You have successfully configured the following Git settings for this project:</p>
+        <pre>
+[user]
+    name = NEXUSfi
+    email = NEXUSfiNEXUSfi@163.com
+[alias]
+    br = branch
+    co = checkout
+    cm = commit -am
+    df = diff
+    st = status
+    pl = pull
+    ps = push
+    cob = checkout -b
+[log]
+    date = iso
+[init]
+    defaultBranch = main
+        </pre>
+    </div>
+    
+    <div class="instructions">
+        <h2>Git Operations Guide</h2>
+        <p>Since browsers cannot execute Git commands directly, please execute the following commands in your terminal or command prompt:</p>
+        <ol>
+            <li>Open a command prompt or terminal window</li>
+            <li>Navigate to the project directory: <code>cd /path/to/NEXUSfi</code></li>
+            <li>Check Git status: <code>git status</code></li>
+            <li>Add all changes: <code>git add .</code></li>
+            <li>Commit changes: <code>git commit -m "NEXUSfi V1.02"</code></li>
+            <li>Push to GitHub: <code>git push origin master</code></li>
+        </ol>
+    </div>
+    
+    <div class="card">
+        <h2>Created Files</h2>
+        <p>During this process, we have created the following files to help with Git operations:</p>
+        <ul>
+            <li><strong>version.txt</strong> - Contains version information</li>
+            <li><strong>git_commit.bat</strong> - Windows batch file for Git operations</li>
+            <li><strong>git-commit.js</strong> - Node.js script for Git operations</li>
+            <li><strong>push.js</strong> - Simplified Node.js script focused on Git commit and push</li>
+            <li><strong>deploy.js</strong> - More comprehensive Node.js script handling SSH key configuration and Git operations</li>
+        </ul>
+        <p>You can choose any of these methods to execute Git operations based on your environment.</p>
+    </div>
+    
+    <div class="card">
+        <h2>SSH Connection Configuration</h2>
+        <p>If you need to configure SSH connection to GitHub, follow these steps:</p>
+        <ol>
+            <li>Generate SSH key: <code>ssh-keygen -t ed25519 -f ~/.ssh/id_github_nexusfi -C "NEXUSfiNEXUSfi@163.com"</code></li>
+            <li>Add public key to your GitHub account: Open <code>~/.ssh/id_github_nexusfi.pub</code> file and copy its contents</li>
+            <li>Visit <a href="https://github.com/settings/keys" target="_blank">GitHub SSH Key Settings</a> and paste the public key</li>
+            <li>Test connection: <code>ssh -T git@github.com</code></li>
+        </ol>
+    </div>
+</body>
+</html> 

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "git-commit": "git add . && git commit -m \"NEXUSfi V1.02\" && git push origin master",
+    "push": "node push.js"
   },
   "dependencies": {
     "@solana/web3.js": "^1.78.0",
