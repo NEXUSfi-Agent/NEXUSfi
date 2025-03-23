@@ -3,7 +3,7 @@
  * In a real application, this data would come from APIs or blockchain
  */
 
-import { Portfolio, PortfolioAsset, Strategy, RiskProfile, RebalancingFrequency, Transaction } from '@/types';
+import { Portfolio, PortfolioAsset, Strategy, RiskProfile, RebalancingFrequency, Transaction, TransactionType } from '@/types';
 
 // Extended Strategy interface for mock data to include additional fields
 interface ExtendedStrategy extends Strategy {
@@ -22,10 +22,10 @@ export const strategies: ExtendedStrategy[] = [
     id: 'yield-optimizer',
     name: 'Yield Optimizer',
     description: 'Focuses on generating sustainable yields from various stablecoin trading pairs and lending protocols. Balances risk and reward to achieve optimized annual returns.',
-    risk: RiskProfile.Low,
+    risk: 'low' as RiskProfile,
     apy: 8.5,
     tvl: 2450000,
-    rebalancing: RebalancingFrequency.Daily,
+    rebalancing: 'daily' as RebalancingFrequency,
     tokens: ['USDC', 'USDT', 'SOL', 'mSOL'],
     supportedTokens: ['USDC', 'USDT', 'SOL', 'mSOL'],
     minimumInvestment: 100,
@@ -52,10 +52,10 @@ export const strategies: ExtendedStrategy[] = [
     id: 'growth-portfolio',
     name: 'Growth Portfolio',
     description: 'Balanced allocation of large to mid-cap crypto assets focused on medium to long-term growth for investors seeking capital appreciation.',
-    risk: RiskProfile.Medium,
+    risk: 'medium' as RiskProfile,
     apy: 15.2,
     tvl: 1850000,
-    rebalancing: RebalancingFrequency.Weekly,
+    rebalancing: 'weekly' as RebalancingFrequency,
     tokens: ['SOL', 'ETH', 'BTC', 'mSOL', 'JitoSOL'],
     supportedTokens: ['SOL', 'ETH', 'BTC', 'mSOL', 'JitoSOL'],
     minimumInvestment: 500,
@@ -82,10 +82,10 @@ export const strategies: ExtendedStrategy[] = [
     id: 'alpha-seeker',
     name: 'Alpha Seeker',
     description: 'Actively seeks alpha returns by leveraging market information asymmetries and arbitrage opportunities, suitable for high-risk, high-reward investors.',
-    risk: RiskProfile.High,
+    risk: 'high' as RiskProfile,
     apy: 32.5,
     tvl: 780000,
-    rebalancing: RebalancingFrequency.RealTime,
+    rebalancing: 'realTime' as RebalancingFrequency,
     tokens: ['SOL', 'RAY', 'ORCA', 'BONK', 'JTO'],
     supportedTokens: ['SOL', 'RAY', 'ORCA', 'BONK', 'JTO'],
     minimumInvestment: 1000,
@@ -112,10 +112,10 @@ export const strategies: ExtendedStrategy[] = [
     id: 'ai-hedge',
     name: 'AI Hedge Strategy',
     description: 'Uses machine learning algorithms to analyze market trends and sentiment, automatically adjusting strategy and position management to seek consistent returns in various market environments.',
-    risk: RiskProfile.MediumHigh,
+    risk: 'medium-high' as RiskProfile,
     apy: 25.8,
     tvl: 1250000,
-    rebalancing: RebalancingFrequency.Hourly,
+    rebalancing: 'hourly' as RebalancingFrequency,
     tokens: ['SOL', 'USDC', 'ETH', 'BTC', 'PYTH'],
     supportedTokens: ['SOL', 'USDC', 'ETH', 'BTC', 'PYTH'],
     minimumInvestment: 2000,
@@ -140,17 +140,32 @@ export const strategies: ExtendedStrategy[] = [
   }
 ];
 
-// Mock portfolio data
+// Mock portfolio data with full Portfolio type requirements
 export const mockPortfolio: Portfolio = {
   id: 'user-portfolio-1',
   userId: 'user-123',
   name: 'My Mixed Portfolio',
   strategyId: 'mixed',
   totalValue: 12580.45,
+  totalInvestment: 0,
   totalInvested: 10000,
+  invested: 10000,
   profit: 2580.45,
   profitPercentage: 25.8,
   assetCount: 5,
+  riskScore: 3,
+  createdAt: '2023-09-01T12:00:00Z',
+  lastRebalanced: '2023-10-01T15:30:00Z',
+  returns: {
+    overall: 25.8,
+    daily: 0.5,
+    weekly: 2.3,
+    monthly: 8.7,
+    yearly: 25.8
+  },
+  strategies: [],
+  holdings: [],
+  performance: [],
   profitLoss: {
     value: 1245.87,
     percentage: 10.98,
@@ -212,9 +227,7 @@ export const mockPortfolio: Portfolio = {
       change24h: -2.5,
       priceChange24h: -2.5
     }
-  ],
-  createdAt: '2023-09-01T12:00:00Z',
-  lastRebalanced: '2023-10-01T15:30:00Z'
+  ]
 };
 
 // Mock transaction history
@@ -223,66 +236,242 @@ export const mockTransactions: Transaction[] = [
     id: 'tx-001',
     userId: 'user-123',
     portfolioId: 'user-portfolio-1',
-    type: 'deposit',
+    type: 'deposit' as TransactionType,
     status: 'completed',
     amount: 5000,
-    asset: 'USDC',
+    token: 'USDC',
     timestamp: '2023-09-01T12:00:00Z',
     txHash: '0x123...abc',
-    token: 'USDC',
     date: '2023-09-01'
   },
   {
     id: 'tx-002',
     userId: 'user-123',
     portfolioId: 'user-portfolio-1',
-    type: 'rebalance',
+    type: 'rebalance' as TransactionType,
     status: 'completed',
     amount: 2000,
-    asset: 'USDC',
+    token: 'USDC',
     timestamp: '2023-09-01T12:05:00Z',
     txHash: '0x124...abd',
-    token: 'USDC',
     date: '2023-09-01'
   },
   {
     id: 'tx-003',
     userId: 'user-123',
     portfolioId: 'user-portfolio-1',
-    type: 'deposit',
+    type: 'deposit' as TransactionType,
     status: 'completed',
     amount: 3000,
-    asset: 'USDC',
+    token: 'USDC',
     timestamp: '2023-09-15T10:30:00Z',
     txHash: '0x125...abe',
-    token: 'USDC',
     date: '2023-09-15'
   },
   {
     id: 'tx-004',
     userId: 'user-123',
     portfolioId: 'user-portfolio-1',
-    type: 'fee',
+    type: 'claim' as TransactionType,
     status: 'completed',
     amount: 25.75,
-    asset: 'USDC',
+    token: 'USDC',
     timestamp: '2023-09-30T23:59:00Z',
     txHash: '0x126...abf',
-    token: 'USDC',
     date: '2023-09-30'
   },
   {
     id: 'tx-005',
     userId: 'user-123',
     portfolioId: 'user-portfolio-1',
-    type: 'withdrawal',
+    type: 'withdraw' as TransactionType,
     status: 'completed',
     amount: 1000,
-    asset: 'USDC',
+    token: 'USDC',
     timestamp: '2023-10-05T14:20:00Z',
     txHash: '0x127...abg',
-    token: 'USDC',
     date: '2023-10-05'
+  }
+];
+
+// Define interfaces for our mock data
+interface PerformanceHistoryData {
+  dates: string[];
+  portfolioValues: number[];
+  benchmarkValues: number[];
+}
+
+interface PriceHistoryData {
+  dates: string[];
+  prices: number[];
+}
+
+interface TokenPriceHistory {
+  [key: string]: PriceHistoryData;
+}
+
+// Mock performance history for charts (daily data for the last 30 days)
+export const mockPerformanceHistory: PerformanceHistoryData = {
+  dates: Array.from({ length: 30 }, (_, i) => {
+    const date = new Date();
+    date.setDate(date.getDate() - (29 - i));
+    return date.toISOString().split('T')[0];
+  }),
+  portfolioValues: [
+    10000, 10050, 10120, 10080, 10150, 10220, 10350, 10290, 10380, 10450,
+    10520, 10480, 10550, 10630, 10590, 10680, 10750, 10830, 10920, 11050,
+    11150, 11230, 11180, 11250, 11380, 11520, 11650, 11720, 11850, 12580
+  ],
+  benchmarkValues: [
+    10000, 10020, 10070, 10050, 10080, 10110, 10160, 10140, 10190, 10230,
+    10270, 10240, 10280, 10330, 10300, 10350, 10390, 10430, 10480, 10550,
+    10600, 10650, 10620, 10660, 10720, 10790, 10860, 10900, 10980, 11090
+  ]
+};
+
+// Mock token price history (daily data for the last 30 days)
+export const mockPriceHistory: TokenPriceHistory = {
+  SOL: {
+    dates: Array.from({ length: 30 }, (_, i) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (29 - i));
+      return date.toISOString().split('T')[0];
+    }),
+    prices: [
+      85, 87, 86, 88, 90, 92, 91, 93, 92, 94,
+      95, 94, 93, 95, 97, 96, 98, 97, 99, 101,
+      100, 102, 101, 99, 101, 103, 102, 104, 102, 100
+    ]
+  },
+  ETH: {
+    dates: Array.from({ length: 30 }, (_, i) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (29 - i));
+      return date.toISOString().split('T')[0];
+    }),
+    prices: [
+      2800, 2820, 2790, 2810, 2830, 2850, 2840, 2860, 2850, 2870,
+      2890, 2880, 2870, 2890, 2910, 2900, 2920, 2910, 2930, 2950,
+      2940, 2960, 2950, 2930, 2950, 2970, 2960, 2980, 2970, 3000
+    ]
+  },
+  BTC: {
+    dates: Array.from({ length: 30 }, (_, i) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (29 - i));
+      return date.toISOString().split('T')[0];
+    }),
+    prices: [
+      58000, 58200, 57900, 58100, 58300, 58500, 58400, 58600, 58500, 58700,
+      58900, 58800, 58700, 58900, 59100, 59000, 59200, 59100, 59300, 59500,
+      59400, 59600, 59500, 59300, 59500, 59700, 59600, 59800, 59700, 60000
+    ]
+  },
+  USDC: {
+    dates: Array.from({ length: 30 }, (_, i) => {
+      const date = new Date();
+      date.setDate(date.getDate() - (29 - i));
+      return date.toISOString().split('T')[0];
+    }),
+    // Stable coin price should be close to 1
+    prices: Array(30).fill(0).map(() => 0.9995 + Math.random() * 0.001)
+  }
+};
+
+// Mock risk assessment data
+export const mockRiskAssessment = {
+  sharpeRatio: 1.8,
+  volatility: 0.12,
+  maxDrawdown: 0.08,
+  beta: 0.95,
+  alpha: 0.03,
+  var95: 0.04,
+  correlations: {
+    BTC: 0.65,
+    ETH: 0.72,
+    SOL: 0.85,
+    SPY: 0.35
+  }
+};
+
+// Mock market data
+export const mockMarketData = {
+  overview: {
+    totalMarketCap: 2850000000000,
+    btcDominance: 45.2,
+    ethDominance: 18.5,
+    dailyVolume: 125000000000,
+    fearGreedIndex: 65
+  },
+  trending: [
+    { symbol: 'SOL', name: 'Solana', price: 100, change24h: 3.5 },
+    { symbol: 'SUI', name: 'Sui', price: 0.85, change24h: 7.2 },
+    { symbol: 'JTO', name: 'Jito', price: 3.2, change24h: 5.1 },
+    { symbol: 'BONK', name: 'Bonk', price: 0.000004, change24h: 12.5 },
+    { symbol: 'WIF', name: 'Dogwifhat', price: 2.05, change24h: 9.8 }
+  ],
+  gainers: [
+    { symbol: 'BONK', name: 'Bonk', price: 0.000004, change24h: 12.5 },
+    { symbol: 'WIF', name: 'Dogwifhat', price: 2.05, change24h: 9.8 },
+    { symbol: 'SUI', name: 'Sui', price: 0.85, change24h: 7.2 }
+  ],
+  losers: [
+    { symbol: 'ORCA', name: 'Orca', price: 0.85, change24h: -5.2 },
+    { symbol: 'RAY', name: 'Raydium', price: 0.35, change24h: -3.8 },
+    { symbol: 'PYTH', name: 'Pyth Network', price: 0.45, change24h: -2.1 }
+  ]
+};
+
+// Mock recommendations based on user profile
+export const mockRecommendations = {
+  conservative: [
+    { strategyId: 'yield-optimizer', fitScore: 0.92 },
+    { strategyId: 'growth-portfolio', fitScore: 0.75 },
+    { strategyId: 'ai-hedge', fitScore: 0.65 }
+  ],
+  moderate: [
+    { strategyId: 'growth-portfolio', fitScore: 0.88 },
+    { strategyId: 'ai-hedge', fitScore: 0.79 },
+    { strategyId: 'yield-optimizer', fitScore: 0.72 }
+  ],
+  aggressive: [
+    { strategyId: 'alpha-seeker', fitScore: 0.94 },
+    { strategyId: 'ai-hedge', fitScore: 0.83 },
+    { strategyId: 'growth-portfolio', fitScore: 0.68 }
+  ]
+};
+
+// Mock user activity
+export const mockUserActivity = [
+  {
+    id: 'activity-001',
+    type: 'strategy-creation',
+    date: '2023-10-05T08:15:00Z',
+    description: 'Created new custom strategy: Growth Focus'
+  },
+  {
+    id: 'activity-002',
+    type: 'deposit',
+    date: '2023-10-05T08:20:00Z',
+    description: 'Deposited 5000 USDC into Growth Focus strategy'
+  },
+  {
+    id: 'activity-003',
+    type: 'rebalance',
+    date: '2023-10-12T14:30:00Z',
+    description: 'Portfolio automatically rebalanced'
+  },
+  {
+    id: 'activity-004',
+    type: 'reward',
+    date: '2023-10-15T00:00:00Z',
+    description: 'Earned 25 NEX tokens from staking rewards'
+  },
+  {
+    id: 'activity-005',
+    type: 'strategy-update',
+    date: '2023-10-18T11:45:00Z',
+    description: 'Updated allocation in Growth Focus strategy'
   }
 ];
 
@@ -294,4 +483,106 @@ export function getStrategyById(id: string): Strategy | undefined {
 // New function to get all strategies
 export function getAllStrategies(): Strategy[] {
   return strategies;
+}
+
+// Helper function: Filter strategies by risk level
+export function getStrategiesByRisk(risk: RiskProfile): Strategy[] {
+  return strategies.filter(strategy => strategy.risk === risk);
+}
+
+// Helper function: Sort strategies by performance
+export function getSortedStrategies(metric: 'apy' | 'tvl', ascending: boolean = false): Strategy[] {
+  return [...strategies].sort((a, b) => {
+    const valueA = a[metric] ?? 0; // 使用空值合并运算符提供默认值
+    const valueB = b[metric] ?? 0;
+    return ascending ? valueA - valueB : valueB - valueA;
+  });
+}
+
+// Helper function: Get portfolio performance over time
+export function getPortfolioPerformance(days: number = 30): PerformanceHistoryData {
+  const actualDays = Math.min(days, mockPerformanceHistory.dates.length);
+  
+  return {
+    dates: mockPerformanceHistory.dates.slice(-actualDays),
+    portfolioValues: mockPerformanceHistory.portfolioValues.slice(-actualDays),
+    benchmarkValues: mockPerformanceHistory.benchmarkValues.slice(-actualDays)
+  };
+}
+
+// Helper function: Get token price history
+export function getTokenPriceHistory(symbol: string, days: number = 30): PriceHistoryData | null {
+  const tokenData = mockPriceHistory[symbol];
+  
+  if (!tokenData) {
+    return null;
+  }
+  
+  const actualDays = Math.min(days, tokenData.dates.length);
+  
+  return {
+    dates: tokenData.dates.slice(-actualDays),
+    prices: tokenData.prices.slice(-actualDays)
+  };
+}
+
+// Helper function: Get recommended strategies for a user profile
+export function getRecommendedStrategies(riskProfile: 'conservative' | 'moderate' | 'aggressive'): Array<Strategy & { fitScore: number }> {
+  const recommendations = mockRecommendations[riskProfile];
+  
+  if (!recommendations) {
+    return [];
+  }
+  
+  return recommendations
+    .map(rec => {
+      const strategy = getStrategyById(rec.strategyId);
+      if (!strategy) return null;
+      return { ...strategy, fitScore: rec.fitScore };
+    })
+    .filter((item): item is Strategy & { fitScore: number } => item !== null);
+}
+
+// Helper function: Calculate portfolio statistics
+export function getPortfolioStats(portfolio: Portfolio) {
+  const initialInvestment = portfolio.totalInvested || 0;
+  const currentValue = portfolio.totalValue || 0;
+  
+  // Calculate returns
+  const absoluteReturn = currentValue - initialInvestment;
+  const percentageReturn = initialInvestment > 0 ? (absoluteReturn / initialInvestment) * 100 : 0;
+  
+  // Asset allocation
+  const assetAllocation = portfolio.assets.reduce((acc, asset) => {
+    acc[asset.symbol] = (asset.allocation || 0) / 100;
+    return acc;
+  }, {} as Record<string, number>);
+  
+  // Calculate diversification score
+  const diversificationScore = calculateDiversificationScore(assetAllocation);
+  
+  return {
+    initialInvestment,
+    currentValue,
+    absoluteReturn,
+    percentageReturn,
+    assetAllocation,
+    assetCount: portfolio.assets.length,
+    diversificationScore,
+    lastRebalanced: portfolio.lastRebalanced || null
+  };
+}
+
+// Helper function to calculate diversification score using Herfindahl-Hirschman Index (HHI)
+function calculateDiversificationScore(allocations: Record<string, number>): number {
+  if (!allocations || Object.keys(allocations).length === 0) return 0;
+  
+  // Calculate HHI
+  const hhi = Object.values(allocations).reduce((sum, allocation) => sum + Math.pow(allocation, 2), 0);
+  
+  // Normalize to 0-100 scale (where 0 is completely concentrated, 100 is perfectly diversified)
+  const n = Object.keys(allocations).length;
+  const normalizedHHI = (1 - hhi) / (1 - 1/n);
+  
+  return Math.round(normalizedHHI * 100);
 } 
