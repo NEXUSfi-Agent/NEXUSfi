@@ -1,0 +1,41 @@
+Implementation Flow Diagram Instructions
+
+The implementation flow diagram should be created as a PNG image (implementation-flow.png) with the following components:
+
+1. Strategy Management Implementation Flow:
+   - User Profile Component -> Preferences Collection
+   - Market Data Analysis Engine
+   - Risk Assessment Models
+   - Strategy Selection Algorithms
+   - Portfolio Construction Service
+   - Rebalancing Engine
+   - Performance Tracking Dashboard
+
+2. Connection points between components showing:
+   - Data dependencies
+   - Service integrations
+   - Control flow
+   - Feedback loops
+
+3. Technical implementation details:
+   - React Components hierarchy
+   - API Service layer
+   - State Management approach
+   - Data Validation steps
+   - Error Handling mechanisms
+   - Blockchain Integration points
+
+4. Use a consistent visual language:
+   - Components as rounded rectangles
+   - Services as hexagons
+   - Data stores as cylinders
+   - External systems as clouds
+   - User interactions as diamonds
+
+5. Color scheme matching project branding:
+   - Primary flow in blue gradient
+   - Secondary processes in teal
+   - External systems in neutral gray
+   - Critical paths highlighted in accent color
+
+This file serves as a placeholder for the actual implementation-flow.png image that should be created by a designer or using a diagramming tool. 

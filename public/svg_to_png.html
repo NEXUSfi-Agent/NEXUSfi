@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG to PNG Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #svgContainer {
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #downloadLink {
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NEXUSfi Logo SVG to PNG Converter</h1>
+        <p>This tool helps you convert the NEXUSfi SVG logo to a PNG image for use in the README.</p>
+        
+        <div id="svgContainer">
+            <!-- The SVG will be inserted here -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+                <!-- Gradient definitions -->
+                <defs>
+                  <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#3498db" />
+                    <stop offset="100%" stop-color="#1a3c6e" />
+                  </linearGradient>
+                  <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#5B86E5" />
+                    <stop offset="100%" stop-color="#36D1DC" />
+                  </linearGradient>
+                  <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#36D1DC" />
+                    <stop offset="100%" stop-color="#5B86E5" />
+                  </linearGradient>
+                  
+                  <!-- Drop shadow filter -->
+                  <filter id="dropshadow" height="130%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
+                    <feOffset dx="2" dy="2" result="offsetblur"/>
+                    <feComponentTransfer>
+                      <feFuncA type="linear" slope="0.5"/>
+                    </feComponentTransfer>
+                    <feMerge> 
+                      <feMergeNode/>
+                      <feMergeNode in="SourceGraphic"/> 
+                    </feMerge>
+                  </filter>
+                  
+                  <!-- Inner shadow filter -->
+                  <filter id="innershadow" height="130%">
+                    <feOffset dx="0" dy="3"/>
+                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                    <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                  </filter>
+                </defs>
+                
+                <!-- Background circle -->
+                <circle cx="150" cy="150" r="125" fill="url(#mainGradient)" filter="url(#dropshadow)" />
+                
+                <!-- Hexagonal nodes representing data/AI -->
+                <polygon points="150,85 188,105 188,145 150,165 112,145 112,105" fill="url(#accentGradient)" stroke="#ffffff" stroke-width="2" filter="url(#innershadow)" />
+                
+                <!-- Connection lines representing network/blockchain -->
+                <path d="M150,85 L190,170 M150,85 L110,170 M190,170 L150,215 M110,170 L150,215" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+                
+                <!-- Central node and accent -->
+                <circle cx="150" cy="85" r="12" fill="#ffffff" />
+                <circle cx="190" cy="170" r="12" fill="#ffffff" />
+                <circle cx="110" cy="170" r="12" fill="#ffffff" />
+                <circle cx="150" cy="215" r="12" fill="#ffffff" />
+                
+                <!-- Central AI/data element -->
+                <circle cx="150" cy="150" r="25" fill="url(#highlightGradient)" stroke="#ffffff" stroke-width="2" />
+                
+                <!-- Pulse effect -->
+                <circle cx="150" cy="150" r="35" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="5,5" />
+                <circle cx="150" cy="150" r="45" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3,8" />
+            </svg>
+        </div>
+        
+        <button id="convertButton">Convert to PNG</button>
+        <a id="downloadLink" download="logo.png" href="#">Download PNG</a>
+    </div>
+
+    <script>
+        document.getElementById('convertButton').addEventListener('click', function() {
+            const svgElement = document.querySelector('svg');
+            const svgData = new XMLSerializer().serializeToString(svgElement);
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas dimensions to match SVG
+            canvas.width = 300;
+            canvas.height = 300;
+            
+            const img = new Image();
+            
+            img.onload = function() {
+                // Draw white background
+                ctx.fillStyle = 'white';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw the image
+                ctx.drawImage(img, 0, 0);
+                
+                // Convert to PNG and prepare download
+                const pngData = canvas.toDataURL('image/png');
+                const downloadLink = document.getElementById('downloadLink');
+                downloadLink.href = pngData;
+                downloadLink.style.display = 'inline-block';
+            };
+            
+            // Load the SVG as image data
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+        });
+    </script>
+</body>
+</html> 

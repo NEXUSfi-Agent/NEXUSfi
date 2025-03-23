@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUSfi Diagram Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2563eb;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #1e40af;
+            margin-top: 30px;
+        }
+        .diagram-container {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            white-space: pre-wrap;
+        }
+        .instructions {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+        }
+        .back-to-home {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .back-to-home a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-to-home a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>NEXUSfi Diagram Viewer</h1>
+    
+    <div class="instructions">
+        <p>This page displays detailed specifications for three key diagrams planned for the NEXUSfi project. These text files serve as guidelines for creating the actual diagrams.</p>
+        <p>Before project release, these text specifications should be replaced with professionally designed diagram images.</p>
+    </div>
+
+    <h2>1. Architecture Diagram</h2>
+    <div id="architecture" class="diagram-container">Loading...</div>
+    <div class="button-container">
+        <button onclick="loadDiagram('architecture.txt', 'architecture')">View Architecture Diagram Specs</button>
+    </div>
+
+    <h2>2. Data Flow Diagram</h2>
+    <div id="data-flow" class="diagram-container">Loading...</div>
+    <div class="button-container">
+        <button onclick="loadDiagram('data-flow.txt', 'data-flow')">View Data Flow Diagram Specs</button>
+    </div>
+
+    <h2>3. Implementation Flow Diagram</h2>
+    <div id="implementation-flow" class="diagram-container">Loading...</div>
+    <div class="button-container">
+        <button onclick="loadDiagram('implementation-flow.txt', 'implementation-flow')">View Implementation Flow Diagram Specs</button>
+    </div>
+
+    <div class="back-to-home">
+        <a href="/">← Back to Home</a>
+    </div>
+
+    <script>
+        function loadDiagram(filename, targetId) {
+            const targetElement = document.getElementById(targetId);
+            targetElement.innerHTML = "Loading...";
+            
+            fetch(`/images/${filename}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response error');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    targetElement.textContent = data;
+                })
+                .catch(error => {
+                    targetElement.textContent = `Loading failed: ${error.message}`;
+                });
+        }
+
+        // Load the first diagram when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDiagram('architecture.txt', 'architecture');
+        });
+    </script>
+</body>
+</html> 

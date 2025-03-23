@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3498db" />
+      <stop offset="100%" stop-color="#1a3c6e" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B86E5" />
+      <stop offset="100%" stop-color="#36D1DC" />
+    </linearGradient>
+    <linearGradient id="highlightGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#36D1DC" />
+      <stop offset="100%" stop-color="#5B86E5" />
+    </linearGradient>
+    
+    <!-- Drop shadow filter -->
+    <filter id="dropshadow" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+    
+    <!-- Inner shadow filter -->
+    <filter id="innershadow" height="130%">
+      <feOffset dx="0" dy="3"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="150" cy="150" r="125" fill="url(#mainGradient)" filter="url(#dropshadow)" />
+  
+  <!-- Hexagonal nodes representing data/AI -->
+  <polygon points="150,85 188,105 188,145 150,165 112,145 112,105" fill="url(#accentGradient)" stroke="#ffffff" stroke-width="2" filter="url(#innershadow)" />
+  
+  <!-- Connection lines representing network/blockchain -->
+  <path d="M150,85 L190,170 M150,85 L110,170 M190,170 L150,215 M110,170 L150,215" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+  
+  <!-- Central node and accent -->
+  <circle cx="150" cy="85" r="12" fill="#ffffff" />
+  <circle cx="190" cy="170" r="12" fill="#ffffff" />
+  <circle cx="110" cy="170" r="12" fill="#ffffff" />
+  <circle cx="150" cy="215" r="12" fill="#ffffff" />
+  
+  <!-- Central AI/data element -->
+  <circle cx="150" cy="150" r="25" fill="url(#highlightGradient)" stroke="#ffffff" stroke-width="2" />
+  
+  <!-- Pulse effect -->
+  <circle cx="150" cy="150" r="35" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="5,5" />
+  <circle cx="150" cy="150" r="45" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="3,8" />
+</svg> 

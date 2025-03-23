@@ -1,0 +1,28 @@
+Architecture Diagram Instructions
+
+The architecture diagram should be created as a PNG image (architecture.png) with the following components:
+
+1. High-level system architecture:
+   - Frontend Layer (Next.js, React, TypeScript)
+   - API/Middleware Layer
+   - Blockchain Layer (Solana Programs)
+   - Data Storage Layer
+
+2. Show clear interactions between components with arrows
+
+3. Include icons/representations for:
+   - User interactions
+   - Wallet connections
+   - Smart contracts
+   - AI/ML models
+   - Data flows
+
+4. Use a professional color scheme with:
+   - Blue gradient (#3498db to #1a3c6e) for main components
+   - Accent color (#36D1DC) for highlighted elements
+   - White text for readability
+   - Light gray backgrounds for containers
+
+5. Include a legend explaining the components
+
+This file serves as a placeholder for the actual architecture.png image that should be created by a designer or using a diagramming tool. 
